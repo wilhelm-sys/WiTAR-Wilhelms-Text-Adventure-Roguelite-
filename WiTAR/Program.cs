@@ -4,7 +4,24 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            ConsoleInitialization();
+            //LogicInitialization();
+            //Loading Save File
+
+            do
+            {
+                //Imput();
+                //Logic();
+                //Output();
+               
+            }while (true);
         }
+
+        static void  ConsoleInitialization()
+        {
+            Console.CursorVisible = false;
+            Console.Title = "WiTAR";
+        }
+
     }
 }
