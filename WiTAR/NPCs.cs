@@ -37,7 +37,7 @@ namespace WiTAR
         protected List<Items> items = new List<Items>();
 
         //initilizer
-        public void Init(string name, int id, int level, int HP, int MP, int SP, int strengh, int intelligence, int vigor, int block, int wisdom, int barrier, int agility, int critchance)
+        public void StatInit(string name, int id, int level, int HP, int MP, int SP, int strengh, int intelligence, int vigor, int block, int wisdom, int barrier, int agility, int critchance)
         {
             _id = id;
             SETname(name);
@@ -92,7 +92,7 @@ namespace WiTAR
         public void SETBASEcritchance(int critchance) { _base_critchance = critchance; }
         //GET befehle
         public string GETname() { return _name; }
-        public int GETleven() { return _level; }
+        public int GETlevel() { return _level; }
         public int GETHP() { return _HP; }
         public int GETBASEHP() { return _base_HP; }
         public int GETMP() { return _MP; }
@@ -131,7 +131,7 @@ namespace WiTAR
     }
     class Player : NPCs
     {
-        //This is the player charcter
+        //This class is the player charcter
         protected List<Equipments> equipments = new List<Equipments>();
         //Increases the stat value in a range from 1 to incmax
         protected int StatUpCheck(int stat, int incmax)
@@ -140,9 +140,10 @@ namespace WiTAR
             int randomInt = random.Next(1, incmax);
             return stat + randomInt;
         }
-        public void Player_init(string name="default")
+        //sets the players default stats
+        public void Player_init(string name="defaultplayer")
         {
-            Init(name, 0,1, 20, 10, 30, 5, 5, 5, 0, 5, 0, 5, 5);
+            StatInit(name, 0,1, 20, 10, 30, 5, 5, 5, 0, 5, 0, 5, 5);
             /*ID: 0
              * Level 1
              * HP: 20
@@ -157,6 +158,10 @@ namespace WiTAR
              * Agility: 5
              * Critchance: 5
              */
+            skills.Add(new Attack());
+            skills.Add(new Block());
+            skills.Add(new Do_Nothing());
+            skills.Add(new Flee());
         }
         //Allows the player to level up
         public void Level_Up()
@@ -172,4 +177,22 @@ namespace WiTAR
             SETBASEagility(StatUpCheck(_base_agility, 5));
         }
     }
+    class Dummy : NPCs
+    {
+        public virtual void CreatureInit() {
+            StatInit("Dummy", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            skills.Add(new Do_Nothing());
+        } 
+    }
+    class Goblin : Dummy
+    {
+        public override void CreatureInit()
+        {
+            StatInit("Goblin", 1, 1, 10, 0, 10, 2, 1, 5, 0, 0, 0, 5, 10);
+            skills.Add(new Attack());
+            skills.Add(new Do_Nothing());
+            skills.Add(new Evade());
+        }
+    }
+
 }
