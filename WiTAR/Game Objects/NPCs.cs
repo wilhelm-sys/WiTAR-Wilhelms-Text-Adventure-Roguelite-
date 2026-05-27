@@ -33,8 +33,8 @@ namespace WiTAR
         protected int _base_agility;        //Base Agility
         protected int _critchance;          //Current Critchance
         protected int _base_critchance;     //Base Critchance
-        protected List<Skills> skills = new List<Skills>();
-        protected List<Items> items = new List<Items>();
+        protected List<Skills> skills = [];
+        protected List<Items> items = [];
 
         //initilizer
         public void StatInit(string name, int id, int level, int HP, int MP, int SP, int strengh, int intelligence, int vigor, int block, int wisdom, int barrier, int agility, int critchance)
@@ -132,7 +132,7 @@ namespace WiTAR
     class Player : NPCs
     {
         //This class is the player charcter
-        protected List<Equipments> equipments = new List<Equipments>();
+        protected List<Equipments> equipments = [];
         //Increases the stat value in a range from 1 to incmax
         protected int StatUpCheck(int stat, int incmax)
         {
